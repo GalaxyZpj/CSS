@@ -67,3 +67,59 @@ Inheritance:
     To increase the specificity of inheritance, we use the 'inherit' value on a property.
     eg.
         font-family: inherit;
+
+BOX Model:
+    CSS interprets every property of an element as a box.
+
+    The body element by default has a margin (depends on browser).
+    To alter the body margin, simply add 'margin: 0;' for body selector.
+
+    Margin Collapsing:
+        When 2 element are adjecent to each other, their margins merge, the bigger margin is in action by default.
+
+Shorthand Properties:
+    Shorthand provides us a short way to alter values for similar type of Properties.
+    eg.
+        Border: 
+            border-style: solid;
+            border-color: red;
+            border-width: 5px;
+        ShortHand:
+            border: 5px solid red;
+    The shorthand here will give same output as in the seperately defined properties.
+    The order of values provided does not matter if there arn't any properties which accepts different type of values.
+    But if there are properties which accepts similar type of values, the order do matter.
+    eg.
+        margin: 5px 10px 5px 10px;      // The order goes as Top Right Bottom Left
+        margin: 5px 10px;               // The order goes as Top & Bottom Left & Right
+Box Sizing:
+    box-sizing: border-box;         // considers padding and border while adjusting height or width
+    box-sizing: content-box;        // does not considers padding and border while adjusting height or width
+    Recommended: set border-sizing to border-box for every element using *.
+
+'display' Property:
+    display property enables us to change the style of the element, i.e. block, inline or both.
+    Inline elements are those which are rendered in a single line by default by the browser.
+    Block elements are those which are rendered in a block, i.e. in a new line in form of block.
+    If we choose to enable both, we can adjust padding border etc as we do in block level elements while the element being an inline one.
+    To enable both:
+        display: inline-block;
+
+calc():
+    This function can be used in css for dimension calculations.
+    Adjust dimentions using arithmatic operators.
+
+Pseudo Classes and Pseudo Elements:
+    Pseudo Classes: defines the style of a special state of an element. Used via ':'. eg. hover, active, etc.
+    Pseudo Element: defines the style of a specific part of an element. Used via '::'. eg. after, before, first-letter, etc.
+
+    Pseudo Element '::after':
+        We add a special property named 'content' for the after pseudo element.
+        'content' allows us to add the content specified as its value to every element with the 'after' or 'before' pseudo element.
+
+Add same properties to more than one elements:
+    We can assign same set of properties to multiple elements as following:
+        a, h1 { }       or      a:hover,a:active { }
+
+url():
+    This function is used to specify a path for an image for example.
