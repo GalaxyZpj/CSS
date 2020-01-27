@@ -1,0 +1,69 @@
+CSS: Cascading Style Sheets
+
+Combinators:
+    Ways to specify which element needs to be affected from the style.
+    Types:
+        Adjecent Sibling(+):
+            Applies if the second tag is directly adjecent with respect to the first tag.
+            eg.
+                div + p {
+                    color: red;         // This applies red color on <p> tag which is directly followed by the div tag
+                }
+
+        General Sibling(~):
+            Applies if the second tag occurs after the first tag.
+            eg.
+                div ~ p {
+                    color: red;         // This applies red color on <p> tag which is followed by the div 
+                }                          tag, not necessarily adjecent.
+                            
+        Child(>):
+            Applies if the second tag is under the level(2nd level) of the first tag.
+            eg.
+                div > p {
+                    color: red;         // Applies when p is under div, that too just under div(same level)
+                }
+
+        Descendant(<space>):
+            Applies if the second tag is under the first tag. Level doesn't matter.
+    
+Selectors:
+    Ways to select the elements which need to get styled.
+    Types:
+        Elements:
+            HTML: <h1>
+            CSS: h1 { }
+        Classes:
+            HTML: <h1 class="my-class">
+            CSS: .my-class { }
+        Universal:
+            HTML: <h1><p><button>
+            CSS: * { }
+        IDs:
+            HTML: <h1 id="temp">
+            CSS: #temp { }
+        Attributes:
+            HTML: <button disabled>
+            CSS: [disabled] { }
+        
+Cascading: Multiple rules can apply to the same element.
+
+Specificity:
+    Resolve conflicts arising from multiple rules.
+    Priority order:
+        Inline Styles
+             v
+        #ID selectors
+             v
+        .class, pseudo-class and [attribute] selectors
+             v
+        <Tag> and ::pseudo-element selectors
+
+CSS is Case Insensitive.
+
+Inheritance:
+    Styles are applied to the most parent element (body) and are inherited by all the child elements.
+    Inheritance have the lowest Specificity.
+    To increase the specificity of inheritance, we use the 'inherit' value on a property.
+    eg.
+        font-family: inherit;
