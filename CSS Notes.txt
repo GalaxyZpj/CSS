@@ -123,3 +123,40 @@ Add same properties to more than one elements:
 
 url():
     This function is used to specify a path for an image for example.
+
+Combine Selectors:
+    We can combine selectors for styling a specific element.
+    eg.
+        a.active { }        // This will target the a tags with class active
+        a#anchorID          // This will target the a tag with id 'anchorID'
+
+!important:
+    This keyword is used to overwrite the specificity order, forcing the property to be applied no matter what the specificity.
+    eg.
+        color: red !important;
+    This shouldn't be used as it will disrupt the order of specificity.
+
+:not():
+    'not' pseodo class is used to exclude the elements which have the property specified to the not and target rest.
+    eg.
+        :not(.active) { }       // This will exclude all elements which have class active.
+        a:not(.active) { }      // This will exclude all the a tags which have class active.
+
+box-shadow:
+    This property is used to add a shadow around an element.
+    eg.
+        box-shadow: 2px 2px 2px 2px red;
+        This will set the shadow around the box for 2px.
+
+rgb():
+    This is a function which is used to set color in rgb format.
+    eg.
+        rgb(255, 255, 255)      // This refers to color white
+    This function also has a subling: rgba().
+    rgba() is used to specify transparency as well.
+    eg.
+        rgba(0,0,0,0.8)         // This refers to black with alpha(transparency) value of 0.8 (1~Opaque, 0~Transparent).
+
+'clear: both': 
+    It is a property which clears float values.
+
