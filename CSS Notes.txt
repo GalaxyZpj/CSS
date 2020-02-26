@@ -101,7 +101,8 @@ Box Sizing:
     display property enables us to change the style of the element, i.e. block, inline or both.
     Inline elements are those which are rendered in a single line by default by the browser.
     Block elements are those which are rendered in a block, i.e. in a new line in form of block.
-    If we choose to enable both, we can adjust padding border etc as we do in block level elements while the element being an inline one.
+    If we choose to enable both, we can adjust padding border etc as we do in block level elements while the element 
+            being an inline one.
     To enable both:
         display: inline-block;
 
@@ -111,11 +112,13 @@ calc():
 
 Pseudo Classes and Pseudo Elements:
     Pseudo Classes: defines the style of a special state of an element. Used via ':'. eg. hover, active, etc.
-    Pseudo Element: defines the style of a specific part of an element. Used via '::'. eg. after, before, first-letter, etc.
+    Pseudo Element: defines the style of a specific part of an element. Used via '::'. eg. after, before, first-letter, 
+            etc.
 
     Pseudo Element '::after':
         We add a special property named 'content' for the after pseudo element.
-        'content' allows us to add the content specified as its value to every element with the 'after' or 'before' pseudo element.
+        'content' allows us to add the content specified as its value to every element with the 'after' or 'before' 
+                pseudo element.
 
 Add same properties to more than one elements:
     We can assign same set of properties to multiple elements as following:
@@ -131,7 +134,8 @@ Combine Selectors:
         a#anchorID          // This will target the a tag with id 'anchorID'
 
 !important:
-    This keyword is used to overwrite the specificity order, forcing the property to be applied no matter what the specificity.
+    This keyword is used to overwrite the specificity order, forcing the property to be applied no matter what the 
+            specificity.
     eg.
         color: red !important;
     This shouldn't be used as it will disrupt the order of specificity.
@@ -160,3 +164,126 @@ rgb():
 'clear: both': 
     It is a property which clears float values.
 
+# Positioning of the elements:
+
+'position' property:
+    It is a property that is used to change the positioning characteristics of an element.
+    It has the following values:
+        static (default)
+        absolute
+        relative
+        fixed
+        sticky (new)
+    'fixed':
+        'fixed' does the following things:
+            Takes the element out of the document flow.
+            Convert the element to inline-block.
+            Fixes the position of the element with respect to the viewport (Browser Screen).
+            To setup a Navbar using 'fixed':
+                marign: 0;
+                top: 0;
+                left: 0;
+                width: 100%;
+                box-sizing: border-box;
+    'absolute':
+        It is similar to fixed with a difference:
+            It fixes the position with respect to the previous ancestor which have the position property applied.
+    'relative':
+        It changes the behavior of the element to change its position with reference of its original position.
+        To prevent the child element being displayed outside of the parent element due to faulty dimentioning:
+            overflow: hidden;
+        We can use overflow property on parent to make sure the element is only displayed inside the parent.
+        To use overflow on body element, we need to apply the overflow property on body as well as html selector, 
+                due to default behavior of CSS.
+    'sticky':
+        It is a combination of 'fixed' and 'relative'.
+        Its top is positioned with respect to the view port.
+        It ends its fixed property when the page is scrolled below its parent element.
+        
+
+Properties to change the position of the elements:
+    There are properties that are used to specify the exact position of the element with respect to the position 
+            property used on the element:
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+
+'z-index' property:
+    This property is used to change the position of an element with respect to the z-axix.
+    By default, each element has a 'z-index' value set as 'auto' or '0'.
+    For eg:
+        z-index: -1;
+        This will move the element behind all the elements by 1 level.
+    Stacking Context of z-index:
+        The z-index of an element is applied with respect to the z-index of the parent element.
+        If the z-index of a child element is higher than the z-index of another parent element, it will have no effect
+                as the z-index of the parent of the child is less than the z-index of the other parent.
+
+# Backgrounds
+
+'background' property:
+    It is a shortend used to access the various modifications related to background.
+
+'background-color' property:
+    It is used to set the background color.
+
+'background-image' property:
+    It is used to set a background image.
+    If 'background-color' and 'background-image' both are applied simulteneously, irrespective of what comes first,
+            background-image always dominates over background-color.
+
+'background-size' property:
+    It is used to set the size of the background image.
+    Eg:
+        background-size: 100%;          // sets the size of image to occupy the whole container
+        background-size: 100% 50%;      // sets the width to 100% and height to 50%
+    It also have several predifined values.
+    Eg:
+        background-size: cover;         // it makes sure to fill the complete space of the container with the image
+        background-size: contain;       // ensures the image is completely inside the container, irrespective of 
+                                                whether it covers the container or not
+
+'background-repeat' property:
+    By default, if the image size specified is much smaller than the area available inside the container, the image
+            is repeated by default, both on x and y axix.
+    This property takes several values:
+        background-repeat: no-repeat;       // this stops image repeatition
+        background-repeat: repeat-x;        // this repeats the image along x-axix
+        background-repeat: repeat-y;        // this repeats the image along y-axix
+
+'background-position' property:
+    It is used to define the position of the image inside the container.
+    It can be used in several ways.
+    Eg:
+        background-position: 10px;                  // pushes the image away from the left by 10px
+        background-position: 10px 10px;             // pushes the image away from the left and from top by 10px
+        background-position: [x-axis] [y-axix];     // shows that 1st and 2nd value is for x and y axis respectively
+        background-position: 10% 20%;               // specifies that image will be cropped by 10% from the left and
+                                                            by 20% from the top
+        background-position: left bottom;           // stick the edge of the image on left and bottom of the container
+        background-position: left top;              // same but top instead of bottom
+        background-position: left 10% bottom 20%    // specifies that image will be cropped by 10% from the left and
+                                                            by 20% from the bottom
+
+'background-origin' property:
+    It specifies the coverage area for the background image with respect to the container.
+    For eg:
+        background-origin: content-box;     // will display image inside the border and padding of the container
+        background-origin: padding-box;     // will display image across the padding area
+        background-origin: border-box;      // will display the image across the container including container borders
+
+'background-clip' property:
+    It specifies the area with respect to the container from where the image will be clipped.
+    For eg:
+        background-clip: content-box;     // clips the image down to the content area, inside the padding
+        background-clip: padding-box;     // clips the image down to include the padding area
+        background-clip: border-box;      // clips the image down to include the margin area
+    This properties overwrites the background-origin property.
+
+'background-attachment' property:
+    It is used to set the scroll behavior of the background image with respect to the page and other elements.
+    For eg:
+        background-attachment: fixed;       // this fixes the image with respect to the viewport of the web browser
+        background-attachment: scroll;      // this fixes the image with respect to the container of the image
+        background-attachment: local;       // this sets the image to be scrolled with other items on the page
