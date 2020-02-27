@@ -287,3 +287,122 @@ Properties to change the position of the elements:
         background-attachment: fixed;       // this fixes the image with respect to the viewport of the web browser
         background-attachment: scroll;      // this fixes the image with respect to the container of the image
         background-attachment: local;       // this sets the image to be scrolled with other items on the page
+
+ShortHand to use all the properties:
+    'background' can be used to apply all the properties together.
+    Syntax:
+        background: [color / image / gradient] [position]/[size] [repeat] [origin] [clip]
+        The sequence is as above.
+
+# Images
+
+Backgrounds give us more versitility to format them, but we can also format our images.
+An image should have a surrounding container. Classes should be assigned to the container and the image itself.
+By default, when the size of the image is specified in % on the img class, it sets the size of the image with respect
+        to the dimentions of the image.
+The container surrounded by the image should be converted to a inline-block element so that the size assigned in %
+        to the image should be reflected on the webpage.
+Eg:
+    .container-class {
+        display: inline-block;
+        width: 70%;
+        vertical-align: middle;
+        box-shadow: 3px 3px 5px 3px rgba(0, 0, 0, 0.3);
+    }
+    .img-class {
+        width: 100%             // 100% of the container
+    }
+    
+    The image will respect the size specified to its container if the display is set to inline-block.
+    4th size value of the box-shadow applied on the container is known as 'spread'. It indicates by how much the 
+            shadow is to extend outside of the margins of the container.
+
+# Gradients
+
+Gradients can be applied as a background image.
+
+'linear-gradient()' function:
+    This function is assigned to the 'background-image' property.
+    It allows us to set linear gradients.
+    Syntax:
+        background-image: linear-gradient([direction], color1, color2, color3, and so on...);
+        The direction argument is optional. We can start by specifying the colors for the gradient.
+        By default, gradient will be directioned from top to the bottom in the sequence of the specified colors.
+        Each color is equally displayed in the gradient by default.
+        Direction can be set in different ways:
+            to bottom: direction from top to bottom
+            to left bottom: will align gradient diagonally which will finish on the left bottom corner
+            0deg: direction specified in degrees. By default, angle starts from the bottom.
+            30deg: will shift to 30deg clockwise from the bottom.
+    Eg:
+        background-image: linear-gradient(red 70%, blue 80%);
+        The percentage values after the color specifies the finishing length of the color in the gradient with
+                respect to the container of the gradient.
+
+'radial-gradient' function:
+    This is also assigned to the 'background-image' property.
+    Eg:
+        background-image: radial-gradient([shape] [size] at [position], color1 [length%], ...)
+        
+        The first argument can be omited.
+        [shape]:
+            By default, radial-gradient provides elliptical shape.
+            There are only 2 values to the shape:
+                ellipse
+                circle
+        [size]:
+            This helps us to set the size for the shape of the gradient.
+            Size can be specified in pixels or in percentage or in any dimentions available.
+            There are several default keywords available to specify the shape:
+                farther-side        // strech the 2nd last color specified to the other side of the container
+                closest-side        // starts the gradient from the left side of the container
+                farthest-corner     // ensures the outermost ring touches the closest corners
+                closest-corner      //  ensures the outermost ring touches the farthest corners
+        [position]:
+            It is specified in terms of x and y axis positions of the gradient.
+        [length%]:
+            Length covered by the color ring
+
+# Background Stacking
+
+We can use multiple type of backgrounds or multiple backgrounds.
+This can be done using the shorthand for background properties, 'background'.
+Eg:
+    background: linear-gradient(), url(), color;
+    'Top to Bottom' will go from 'Left to Right'.
+    linear-gradient will be on top, than url, than color.
+We can set only one solid color, and multiple images as background.
+
+# Filters
+
+'filter' is a property which can be applied on an image.
+It is an overlay and by default provide several default keywords which we can use to achieve several functionality.
+
+# Sizes and Units
+
+Rules for 'percentage' sizing:
+    If an element has position: fixed applied, than the % sizing will be with reference to the viewport.
+    If an element has position: absolute applied, than the % sizing will be with reference to the (content+padding)
+            area of the last ancestor which has the position: relative/absolute/fixed/sticky applied.
+    If an element has position: static/relative applied, than the % sizing will be with reference to the content area
+            of the last block level ancestor.
+
+'max-width':
+    Used to set maximum width to the element.
+
+'min-width':
+    Used to set minimum width to the element.
+
+Font Sizing:
+    Specifying the size of fonts in units such as px will have on change on the font size when we change the browser
+            settings for the font.
+    To make the font size dynamic, i.e. respect the browser settings too, there are some special units available for
+            this purpose:
+        'em'
+        'rem'
+        Browser sets a default size for the fonts. These units take the browser default font size and multiply it
+                with the value specified with the unit 'em' or 'rem'.
+        Behavior of 'em':
+            em inherits the font size of its parent elements and scales its size with its own value.
+        The only difference between 'rem' and 'em' is that 'rem' does not inherit any font size from its parent elements.
+        It only obeys the current value which gets multiplied with the browser defaults.
