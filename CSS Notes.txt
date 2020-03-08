@@ -159,7 +159,7 @@ rgb():
     This function also has a subling: rgba().
     rgba() is used to specify transparency as well.
     eg.
-        rgba(0,0,0,0.8)         // This refers to black with alpha(transparency) value of 0.8 (1~Opaque, 0~Transparent).
+        rgba(0,0,0,0.8)         // This refers to black with alpha(transparency) value of 0.8(1~Opaque,0~Transparent).
 
 'clear: both': 
     It is a property which clears float values.
@@ -406,3 +406,197 @@ Font Sizing:
             em inherits the font size of its parent elements and scales its size with its own value.
         The only difference between 'rem' and 'em' is that 'rem' does not inherit any font size from its parent elements.
         It only obeys the current value which gets multiplied with the browser defaults.
+
+Viewport Units:
+    There are units which are used to define the size of an element with respect to the viewport of the browser:
+        vw: sets width with respect to the width of the viewport.
+        vh: sets height with respect to the height of the viewport.
+        vmin: sets the size with respect to the smaller dimention of the viewport.
+        vmax: sets the size with respect to the larger dimention of the viewport.
+    These units takes value in terms of percentages of the dimentions of the viewport.
+
+# Using JavaScript for styling
+
+JavaScript can be used to change the styles of an element dynamically or after the page has been loaded.
+JavaScript functions can be defined in 2 ways:
+    Inline, i.e. in the html file itself inside the <script></script> tag.
+    In a seperate js file
+
+Importing a js file in a html file:
+    To link a js file into an html file, we pass an attribute to the script tag as:
+        <script src="jsFileName.js"></script>
+
+Selecting an element in the JavaScript file:
+    We can select an element or multiple elements from the js file using the same selectors as in css and some built
+            in functions for js.
+    DOM stands for Document Object Model. It is a virtual representation of our html page.
+    Js selects the elements from the DOM of the page.
+    
+    Selecting a single element inside the js file:
+        var varName = document.querySelector(
+            '[.className / #id / any other selector used in css, along with combinators too]')
+
+        Above, 'var' is used to declare a variable in the js file.
+        'varName' is the name for the variable.
+        'document' is an object which helps us to access the DOM.
+        'querySelector' is a function of 'document' which is used to select an element from the DOM.
+        It only returns the first occurence of the element in the DOM.
+    
+    Selecting multiple elements:
+        Instead of 'querySelector', use 'querySelectorAll'.
+        It returns an array of elements with the specified selector.
+    
+    The above mensioned methods to select the element are only used to select inline styles.
+    They cannot be used to select styles from a CSS file.
+
+Accessing the styles of an element:
+    Element styles can be accessed using the variable which has the reference for the element.
+    Eg:
+        varName.style.display = 'block';
+
+        Here, any property can be accessed using the style keyword followed by the property name as shown.
+
+Adding event listner to an element:
+    Eg:
+        varName.addEventListner('click', function() {
+            ===
+        })
+
+        'varName' has a reference to an element via 'querySelector'.
+        'addEventListner' is the keyword which is used to attatch an event listner to the element.
+        Event Listner are of many types. The one used above is used to execute the function when the element is
+                clicked on the html page.
+
+Replacing a class with JavaScript:
+    To replace an existing class on an element:
+        varName.className = 'newClass';
+
+        'varName' has a reference to the element.
+        'className' is used to assign a new class to the element.
+        'newClass' is the name for the new class which is to be assigned to the element.
+
+Adding or removing classes on the element:
+    We can add classes on an element as an inline class as follows:
+        varName.classList.add('newClass');
+
+    To remove an incline class:
+        varName.classList.remove('classToBeRemoved');
+
+Accessing CSS propeties in js file:
+    If we have a multiple words property, such as 'border-radius', which have its 2 words seperated by '-',
+            then to access this property in js file, there are 2 ways:
+        varName.style['border-radius']      // property name is passed as a string inside []
+        varName.style.borderRadius          // camelCasing used for 2 seperate words to access the property in this way
+
+# Making our website responsive
+
+'viewport' meta tag:
+    It helps the browser to understand the difference between the size of the devices.
+    It is placed in the head section of the html file.
+    Eg:
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=2.0, 
+            minimum-scale=1.2">
+
+        [name="viewport"] specifies the meta tag content is to be refered to the viewport of the webpage.
+        'content' has several properties which are linked to the webpage.
+        [width=device-width] informs the browser the size of the device on which the webpage is opened.
+        [initial-scale=1.0] specifies the default zoom level of the webpage.
+        [user-scalable=yes] allows the user to zoom in to the webpage. Set it to 'no' to diable the zoom functionality.
+        [maximum-scale=2.0] is used to set the limit for user to zoom the webpage 2 times.
+        [minimum-scale=1.2] is used to set the limit for user to zoom out the webpage to 1.2 times.
+
+'@media' queries:
+    These are sort of an if statement inside a css file.
+    These help us to set the css properties base on specified conditions.
+    Eg:
+        @media (min-width: 40rem) {
+            .className {
+                font-size: 2rem;
+            }
+        }
+
+        Here, 'min-width' is the condition which is checked before the properties inside the media queries are applied.
+        If the width of the page is greater than 40rem, than the code inside the @media query is applied.
+    There can be multiple @media queries in a CSS file.
+    If there are 2 media queries and their conditions clashes with each other, than the @media query which is used
+            later in the CSS file is applied.
+    Multiple conditions for @media queries:
+        To check for multiple conditions, 'and' or ',' is used.
+        Eg:
+            @media (min-height: 40rem) and (orientation: potrait) { }
+
+            In the above line, when both the conditions are met, than the code inside the @media query is applied. 
+
+            @media (min-height: 40rem), (orientation: potrait) { }
+
+            In the above line, when one of the two conditions are met, than the code inside the @media query is applied. 
+
+# Styling Forms
+
+Advanced Attribute Selectors:
+    We can also used attributes in different manner to select the elements in the DOM.
+    
+    -Element with Attribute:
+        [type] { }
+        This selects all elements which contain type attribute.
+    
+    -Element with specific attribute value:
+        [type="email"] { }
+        This will select all elements which has type="email".
+    
+    -Element with specific attribute value in list:
+        [lang ~="en-us"] { }
+        This selects all the elements which has a 'lang' attribute, with a value as a list of values in which 'en-us'
+                is one of the value in the list.
+    
+    -Element with specific attribute 'value' / 'value-':
+        [lang |="en"] { }
+        This selects all elements which has a 'lang' attribute, with a value which starts with 'en' or 'en-'.
+    
+    -Element with specific attribute value prefix:
+        [href^="#"] { }
+        This will select elements which has a 'href' attribute, and whose value starts with '#'.
+
+    -Element with specific attribute value suffix:
+        [href$=".de"] { }
+        This will select elements which has a 'href' attribute, and whose value ends with '.de'.
+    
+    -Elements with at least one attribute value:
+        [src*="cdn"] { }
+        This will select elements which has a 'src' attribute, and 'cdn' is found in between or anywhere in its value.
+        Insert 'i' after specifying the value to ignore the case sensitivity of the value.
+            [src*="cdn" i] { }
+'outline' property:
+    It is activated when an input element is focused.
+    It is similar to a border but it does contribute in the size of the element.
+    It comes after the border.
+
+:not() pseudo selector:
+    It is used to add exceptions for a selector.
+    Eg:
+        input:not([type="email"]) { }
+        This will select all the input elements on the webpage instead those which have a type="email" attribute.
+
+'appearance' property:
+    This property is applied by default by the browser on the element.
+    Browser provides different type of values for this property depending on the element type.
+    This property can be accessed using different property names for different browsers, such as:
+        -webkit-appearance          // for chrome
+        -moz-appearance             // for mozilla
+    To overwrite this property, we set it to none.
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+
+:checked pseudo class:
+    It is used with the input element with type="checkbox".
+    It is used to set the properties for a checked checkbox input element.
+
+:invalid pseudo class:
+    It is used to set the properties for the elements inside the form if any of the form elements are invalid.
+    Eg:
+        .form-class :invalid {
+            ...
+        }
+        The space before ':' is important.
+    There is a valid pseodo class as well which works in the same manner.
