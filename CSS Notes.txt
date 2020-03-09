@@ -600,3 +600,107 @@ Advanced Attribute Selectors:
         }
         The space before ':' is important.
     There is a valid pseodo class as well which works in the same manner.
+
+# Working with Texts and Fonts
+
+Generic Families:
+    There are specific font families which are characterised into generic families:
+        serif
+        sans-serif
+        cursive
+        monospace
+        fantasy
+    These act as fallbacks when the desired font-family are not available to the browser.
+
+Font Families:
+    The fonts which share common generic font are said to be a font family.
+
+Applying a Font Family through CSS:
+    For applying a font family, we need to make sure that the font family has been imported in the HTML file.
+    Now, to apply the font family, we follow the following syntax:
+        body {
+            font-family: "fontFamilyName", sans-serif;
+        }
+        Here, "fontFamilyName" is the font that has been imported in the html file.
+        It is necessary to wrap the font family name in quotes("") if the font family name consists of multiple words.
+        If the font family name is one word only, than it is optional to use quotes.
+        In the above example, "fontFamilyName" will be applied by default on our html page.
+        In case, "fontFamilyName" is not valid or not found, the font family to be used will be the font family
+                which is specified after the "fontFamilyName".
+        In the above example, "sans-serif" is a generic font family which will be applied in case if "fontFamilyName"
+                is not found or is invalid.
+        We can pass as many font family names as the value of 'font-family' property (seperated by comma).
+        They will be applied in the fallback order.
+        The last font family must always be a generic family which makes sure that font is always displayed on
+                our webpage.
+
+Importing a web font:
+    There are 2 ways to import a web font:
+        Importing in HTML file
+        Importing in CSS file
+
+Font Faces:
+    A font family also consists of font faces which define the weight or style for the font family.
+    To use the font face of our web imported font family, we need to make sure that we have also imported the
+            font faces related to the font family in order to use them.
+    The browser, by default, tries to add the font style on its own in case the font style related to the font
+            family is not imported.
+    The font faces can be used using the 'font-weight' and 'font-style' properties.
+    Eg:
+        body {
+            font-family: "Roboto", sans-serif;
+            font-weight: 900;
+            font-style: italic
+        }
+
+Importing Font Faces via font-face (.ttf) file:
+    We can also import the font face using the font-face files which are saved in the project directory.
+    Eg:
+        @font-face {
+            font-family: "fontFamilyName";
+            src: url("path to the .ttf file");
+        }
+        This will import the font-face with the 'normal' font-weight by default.
+        To specify the font-weight, we need to explicitely include the font-weight property to the import:
+            @font-face {
+            font-family: "fontFamilyName";
+            src: url("path to the .ttf file");
+            font-weight: 700;
+        }
+
+Different Font Properties:
+    font-size
+    font-variant
+    font-stretch
+    letter-spacing
+    white-space
+    line-height
+    text-decoration
+    text-shadow
+
+Font ShortHand:
+    We can use properties related to font together using the font shorthand:
+        font: font-style font-variant font-weight font-size/line-height font-family;
+        In the above example, font-size and font-family are compulsory arguments for the font shorthand, rest
+                are optional.
+        The positioning of the properties is important and the above mensioned order is to be followed.
+    Font shorthand can also be used to set some default system fonts.
+    Eg:
+        font: menu;
+        font: status-bar;
+
+'font-display' property:
+    This property is used to optimize the loading time of the fonts.
+    It is used with the '@font-face' import.
+    It is set to 'auto' by default.
+    It as additional 4 values:
+        swap
+        block
+        fallback
+        optional
+    Eg:
+        @font-face {
+            font-family: "fontFamilyName";
+            src: url("path to the .ttf file");
+            font-display: swap;
+        }
