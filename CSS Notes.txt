@@ -220,6 +220,7 @@ Properties to change the position of the elements:
         If the z-index of a child element is higher than the z-index of another parent element, it will have no effect
                 as the z-index of the parent of the child is less than the z-index of the other parent.
 
+
 # Backgrounds
 
 'background' property:
@@ -294,6 +295,7 @@ ShortHand to use all the properties:
         background: [color / image / gradient] [position]/[size] [repeat] [origin] [clip]
         The sequence is as above.
 
+
 # Images
 
 Backgrounds give us more versitility to format them, but we can also format our images.
@@ -316,6 +318,7 @@ Eg:
     The image will respect the size specified to its container if the display is set to inline-block.
     4th size value of the box-shadow applied on the container is known as 'spread'. It indicates by how much the 
             shadow is to extend outside of the margins of the container.
+
 
 # Gradients
 
@@ -363,6 +366,7 @@ Gradients can be applied as a background image.
         [length%]:
             Length covered by the color ring
 
+
 # Background Stacking
 
 We can use multiple type of backgrounds or multiple backgrounds.
@@ -373,10 +377,12 @@ Eg:
     linear-gradient will be on top, than url, than color.
 We can set only one solid color, and multiple images as background.
 
+
 # Filters
 
 'filter' is a property which can be applied on an image.
 It is an overlay and by default provide several default keywords which we can use to achieve several functionality.
+
 
 # Sizes and Units
 
@@ -404,7 +410,8 @@ Font Sizing:
                 with the value specified with the unit 'em' or 'rem'.
         Behavior of 'em':
             em inherits the font size of its parent elements and scales its size with its own value.
-        The only difference between 'rem' and 'em' is that 'rem' does not inherit any font size from its parent elements.
+        The only difference between 'rem' and 'em' is that 'rem' does not inherit any font size from its
+                parent elements.
         It only obeys the current value which gets multiplied with the browser defaults.
 
 Viewport Units:
@@ -414,6 +421,7 @@ Viewport Units:
         vmin: sets the size with respect to the smaller dimention of the viewport.
         vmax: sets the size with respect to the larger dimention of the viewport.
     These units takes value in terms of percentages of the dimentions of the viewport.
+
 
 # Using JavaScript for styling
 
@@ -488,6 +496,7 @@ Accessing CSS propeties in js file:
         varName.style['border-radius']      // property name is passed as a string inside []
         varName.style.borderRadius          // camelCasing used for 2 seperate words to access the property in this way
 
+
 # Making our website responsive
 
 'viewport' meta tag:
@@ -515,7 +524,8 @@ Accessing CSS propeties in js file:
             }
         }
 
-        Here, 'min-width' is the condition which is checked before the properties inside the media queries are applied.
+        Here, 'min-width' is the condition which is checked before the properties inside the media
+                queries are applied.
         If the width of the page is greater than 40rem, than the code inside the @media query is applied.
     There can be multiple @media queries in a CSS file.
     If there are 2 media queries and their conditions clashes with each other, than the @media query which is used
@@ -529,7 +539,9 @@ Accessing CSS propeties in js file:
 
             @media (min-height: 40rem), (orientation: potrait) { }
 
-            In the above line, when one of the two conditions are met, than the code inside the @media query is applied. 
+            In the above line, when one of the two conditions are met, than the code inside the @media query is
+                    applied. 
+
 
 # Styling Forms
 
@@ -600,6 +612,7 @@ Advanced Attribute Selectors:
         }
         The space before ':' is important.
     There is a valid pseodo class as well which works in the same manner.
+
 
 # Working with Texts and Fonts
 
@@ -704,3 +717,121 @@ Font ShortHand:
             src: url("path to the .ttf file");
             font-display: swap;
         }
+
+
+# Flexbox
+
+Flexbox provide an efficient way to display items in a container.
+A Flexbox container is known as 'flex container' and the items inside it are known as 'flex items'.
+
+Converting a container to flex container:
+    To do so, we apply any of the 2 properties:
+        display: flex;                  // flex items behave as block elements
+        display: inline-flex;           // flex items behave as inline elements
+
+    By using the above properties, several properties are applied by default with their default values:
+        flex-direction: row;
+        flex-wrap: nowrap;
+    
+    A flex container's orientation can be described in terms of 'main' and 'cross' axis.
+    The position of main and cross axis depends on the flex-direction property.
+
+'flex-direction' property:
+    It is used to set the direction or orientation of the flex container.
+    It has following values:
+            flex-direction: row;                                        // used by default
+                main axis goes from top-left to top-right
+                cross axis goes for top to bottom
+            flex-direction: row-reverse;
+                main axis goes from top-right to top-left
+                cross axis goes for top to bottom
+            flex-direction: column;
+                main axis goes from top to bottom
+                cross axis goes for top-left to top-right
+            flex-direction: column-reverse;
+                main axis goes from bottom to top
+                cross axis goes for top-left to top-right
+
+'flex-wrap' property:
+    It is used to handle the behavior of the flex container of how it handle its flex items.
+    It has following values:
+        flex-wrap: nowrap;
+        flex-wrap: wrap;
+        flex-wrap: wrap-reverse;
+
+'flex-flow' property:
+    It is a shorthand for 'flex-direction' and 'flex-wrap' property.
+    Its syntax is as follows:
+        flex-flow: [direction] [wrap];
+
+Aligning items inside the flex-container:
+    There are properties which are used to align items inside the container:
+        justify-content
+        align-items
+    These properties take a few common values:
+        flex-start
+        flex-end
+        center
+        etc...
+
+    'justify-content' property:
+        This defines the alignment of the items inside the flex container with respect to the main axis.
+
+    'align-items' property:
+        This defines the alignment of the items inside the flex container with respect to the cross axis.
+
+    'align-content' property:
+        This property is used to define the alignment of flex items along the cross axis with respect to a row
+                inside a container.
+        Eg:
+            align-content: center;
+            align-content: space-between;
+
+Flex Items Properties:
+    We can apply properties to flex items as well.
+
+'order' property:
+    This property defines the sequencial order of the element at which it is to be displayed in the flex container.
+    It accepts numerical values as to define the order of the element.
+    By default, order of all elements is 0.
+    Higher the order of the element, later the element will occur along the main axis.
+    Eg:
+        item_1 {
+            order: 1;
+        }
+
+'align-self' property:
+    This property is similar to the 'align-items' property with a difference that 'align-items' refers to
+            all the flex elements, whereas 'align-self' refers to a single flex item.
+    It has similar values as 'align-items' property.
+
+'flex-grow' property:
+    It allows the item to take up the empty space, along the main axis of the flex container, in the ratio of
+            the value provided to it.
+    Eg:
+        item_1 {
+            flex-grow: 1;
+        }
+        item_2 {
+            flex-grow: 2;
+        }
+        The 1st item will take up the empty space in the ratio 1/3.
+        The 2nd item will take up the empty space in the ratio 2/3.
+    By default, flex-grow has the value of 0 at all flex items.
+
+'flex-shrink' property:
+    It allows the item to shrink, along the main axis of the flex container, in the ratio of the value provided
+            to it.
+    By default, flex-shrink has the value of 1 at all flex items.
+
+'flex-basis' property:
+    It is used to define a fixed length for an item along the main axis.
+    It has a default value of 'auto'.
+    At its default value, its behavior falls back to the value of height or width, depending on the orientation of
+            main axis.
+    It accepts length values.
+
+flex shorthand:
+    flex shortend is used to use flex-grow, flex-shrink and flex-basis together.
+    Eg:
+        flex: [flex-grow] [flex-shrink] [flex-basis];
