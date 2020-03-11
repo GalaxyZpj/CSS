@@ -835,3 +835,285 @@ flex shorthand:
     flex shortend is used to use flex-grow, flex-shrink and flex-basis together.
     Eg:
         flex: [flex-grow] [flex-shrink] [flex-basis];
+
+
+# CSS Grid
+
+Grid is an advanced CSS concept which helps us in better positioning of elements on our webpage.
+
+Converting a container to a Grid:
+    To convert a div container to a Grid:
+        display: grid;
+    The elements right under the parent grid are affected by the grid positioning.
+
+Properties used by a Grid Container:
+    'grid-template-columns' property:
+        It is used to explicitely define columns and its length.
+        Eg:
+            grid-template-columns: 50px 50px;
+            This defines 2 columns within a grid of length 50px each.
+
+            grid-template-columns: 50px 20% 1fr 3fr;
+            This defines 4 columns within a grid, of which, the first column takes a fixed length of 50px, second
+                    column takes a length of 20% of the length of the surrounding container, the third column and
+                    the 4th column use a special unit known as 'fractional unit'. This unit defines the length of
+                    the columns in ratio of the provided value, with respect to the left over space after defining
+                    the first 2 columns.
+
+    'grid-template-rows' property:
+        It is used to explicitely define the rows inside a grid in the similar way as we define columns using
+                'grid-template-columns' property.
+    The following properties can also take a value of 'auto', which tells a cell to take up the remaining space of
+            the grid.
+
+Spanning rows and columns of the Grid:
+    We can set an element of a grid to take up the space of multiple cells.
+    The CSS Grid system defines 'numbers' for its grid lines.
+    There are few properties which are used on the grid elements itself to help us with the above mensioned behavior.
+    Spanning columns:
+        We can allow a grid element to take up the space of multiple column by combining the following properties:
+            grid-column-start
+            grid-column-end
+        The follownig can be illustrated using the following example:
+            grid-column-start: 2;
+            grid-column-end: 4;
+            The above example states that the element will take up the space between the grid line number 2 and
+                    the grid line number 4.
+            The element will be occupying the space of 2 columns.
+    Spanning rows:
+        We can achieve the similar behavior for rows by using following properties:
+            grid-row-start
+            grid-row-end
+    
+    For the 'grid-column-end' and 'grid-row-end' property, instead of passing the line number to which the cell
+            is to end, we can pass the number of cells the cell is to be spanned.
+    Eg:
+        grid-row-start: 1;
+        grid-row-end: span 2;
+        The 'span 2' is a single value which tells the grid element to span across 2 rows of the grid.
+    
+    It is also possible for the grid elements to get overlapped if we explicitely define the start and end of the
+            cell such as they overlap with each other.
+
+'repeat()' function:
+    It allows us to repeat the input for the values.
+    Eg:
+        grid-template-columns: repeat(N, 5rem);
+        N is the number of times the argument needs to be repeated.
+        In the above statement, there will be N columns each with a length of 5rem inside the grid.
+
+'minmax()' function:
+    It is used to define the min and max length of a cell.
+    Eg:
+        grid-template-rows: 5rem minmax(10px, 150px);
+        The above statement defines 2 rows inside the Grid.
+        The first row will have a height of 5rem.
+        The second row will have a minimum height of 10px and a maximum height of 150px, as per the space available
+                inside the grid.
+
+Naming Grid Lines:
+    By default, Grid assign numbers to the grid lines.
+    We can also assign custom names to the grid lines.
+    Eg:
+        grid-template-columns: [col-1-start] 5rem [col-1-end col-2-start] 10rem [col-2-end]
+        In the above example, we assigned names to the lines as:
+            Line 1: col-1-start
+            Line 2: col-1-end & col-2-start
+            Line 3: col-2-end
+        It shows that we can also assign multiple names to a grid line.
+        Now, we can used the grid line names as a reference to the grid lines in the properties such as
+                grid-row-start, etc.
+
+'grid-column' & 'grid-row' ShortHand:
+    It is used to combine the 'start' and 'end' properties into one property.
+    Eg:
+        grid-column: 1 / span 2;
+        In the above example, the start value is 1 and the end value is stated to be 'span 2', with a
+                seperation via '/'.
+'grid-area' ShortHand:
+    This shorthand combines the start and end properties of both rows and columns.
+    Eg:
+        grid-area: [grid-row-start] / [grid-column-start] / [grid-row-end] / [grid-column-end];
+
+Adding gaps between grid rows and columns:
+    'grid-column-gap' & 'grid-row-gap' properties:
+        These properties are used to specify gaps between the grid cells.
+        Eg:
+            grid-column-gap: 10px;
+            grid-row-gap: 20px;
+            The above example adds a gap of 10px to the columns and of 20px to the rows.
+    
+    'grid-gap' ShortHand:
+        This is used to combine 'grid-column-gap' & 'grid-row-gap' properties.
+        Eg:
+            grid-gap: [row-gap] [column-gap];
+            grid-gap: 10px;                             // assigns a gap of 10px to both rows and columns
+
+Naming the cells of the grid:
+    We can assign names to the cells of the CSS grid using the 'grid-template-areas' property:
+    Eg:
+        grid-template-areas: "header header header header"
+                             ". . main main"
+                             "footer footer footer footer";
+        The above example is the naming of a 3x4 (3 rows 4 columns) Grid.
+        Here, the 4 columns in the first row are named as header.
+        The first 2 columns of the 2nd row are unnamed, hence left with a '.'
+        The 4 columns in the 3rd row are named as footer.
+        The cells can now be refered, using the assigned names, by different properties:
+            grid-area: header;
+            This makes sure that the grid element spans across the cells named as 'header'.
+    The naming must be done of each and every cell inside the grid.
+
+Naming Grid lines with the use of repeat() function:
+    We can name the grid lines inside the repeat() function as follows:
+        grid-template-columns: repeat(N, [col-start] 5rem [col-end]);
+        Now, to access a specific iteration of the col, we do the following:
+            grid-column: col-start 2 / col-end 2;
+            This will access the 2nd iteration of col-start and col-end.
+
+Naming a Grid area:
+    We can name a grid area by following a specific naming convension to name the columns and rows of the grid.
+    Eg:
+        grid-template-columns: [header-start] repeat(4, 25%) [header-end];
+        grid-template-rows: [header-start] 5rem 5rem [header-end];
+
+        Now, if we we need to access the above defined section of the grid, we simply access it using'header'.
+            grid-area: header;
+
+'fit-content()' function:
+    It is used to set a minimum size of a row inside a grid but also makes sure to wrap the content inside the row.
+    Eg:
+        grid-template-rows: 3rem auto fit-content(9rem);
+Positioning Grid Items:
+    'justify-items' property:
+        It is used to position the item inside its spanning area horizontally.
+        It is applied on the Grid container itself.
+        Its default value is 'stretch'.
+        Eg:
+            justify-items: center;
+            justify-items: start;
+            justify-items: end;
+
+    'align-items' property:
+        It is used to position the item inside its spanning area vertically.
+        It is also applied to the grid container itself.
+        Its default value is 'stretch'.
+        Eg:
+            align-items: center;        
+            align-items: start;
+            align-items: end;
+
+Positioning Grid Content:
+    Sometimes, the grid items does not cover the whole grid container area.
+    To position the grid content with respect to the grid area, we use the following properties:
+        'justify-content' property:
+            It aligns the position of the content with respect to the x-axis.
+            Eg:
+                justify-content: center;
+                justify-content: start;
+                justify-content: end;
+        'align-content' property:
+            It aligns the position of the content with respect to the y-axis.
+            Eg:
+                align-content: center;
+                align-content: start;
+                align-content: end;
+
+Positioning Individual Grid Element:
+    We can also position individual grid element using the following properties:
+        'justify-self' property:
+            Used to align the item along the x-axis inside its spanning area.
+        'align-self' property:
+            Used to align the item along the y-axis inside its spanning area.
+
+'grid-auto-flow' property:
+    By default, Grid automatically adds rows to fit its items into the grid.
+    To change this behavior, i.e. to add dynamic columns instead of rows, we do the following:
+        grid-auto-flow: row;                // default
+        grid-auto-flow: column;
+        grid-auto-flow: column dense;       // this makes sure that there is no empty cell inside the grid.
+        grid-auto-flow: row dense;
+
+'grid-auto-rows' property:
+    It is used to set the size for dynamically created rows.
+    Eg:
+        grid-auto-rows: 5rem;
+
+'grid-auto-columns' property:
+    It is used to set the size for dynamically created columns.
+
+Dynamic columns and rows according to the content filling the viewport:
+    If we want to dynamically add rows if the content does not fit the viewport anymore, we can do the following:
+        grid-template-columns: repeat(auto-fill, 20rem);
+        This makes sure that after the viewport is full with the elements, a new row will be created dynamically
+                for the content.
+        Similarly, instead of 'auto-fill', we can use 'auto-fit', to get the same behavior but also to center the
+                grid items.
+
+
+# CSS Transforms
+
+'transform' property:
+    It is used to move the elements that are part of document flow.
+    It accepts certain functions as its value to move the elements.
+
+'rotate()' function:
+    It is used to rotate the element.
+    It rotates the element along the z-axis by default.
+    It accepts value in deg.
+    Eg:
+        transform: rotate(45deg);
+    There are functions like rotateY which rotates the element along the specified axis.
+    These functions can be used for 3D transformations.
+
+'translate()' function:
+    It is used to move the element along its x-axis.
+    When the element is rotated, its axises are also rotated.
+    It accepts values in terms of length units.
+    Eg:
+        transform: translate(1rem, 1rem);
+    Similarly, there are 'translateY', 'translateZ', etc.
+
+'skew()' function:
+    It is used to strech an image from its corner according to the defined axis.
+    It takes up values in deg.
+    Eg:
+        transform: skew(X, Y, Z);
+        There are different functions such as skewX etc.
+
+'scale()' function:
+    It is used to scale the element.
+    It accepts numerical values.
+    Eg:
+        transform: scale(1.4);
+        It scales along both x and y axis.
+        There are functions, such as scaleX etc to scale along a perticular axis.
+
+'perspective' property:
+    It is used to change the distance from which the object is viewed to the user.
+    It is applied to the container which has some transformed elements.
+    Eg:
+        perspective: 1000px;
+
+'perspective-origin' property:
+    It is used to set the origin point of the perspective.
+    Eg:
+        perspective-origin: 500px;
+
+'transform-origin' property:
+    It is used to set the origin/poing along which the rotation takes place.
+    Eg:
+        transform-origin: center;
+        transform-origin: 25% 50%;
+
+'transform-style' property:
+    It is used to change the display of the 3D effect of the transform function.
+    It has a value of 'flat' by default.
+    Eg:
+        transform-style: preserve-3d;
+
+'backface-visibility' property:
+    It is used to set the visibility of the back side of the transformed element.
+    Eg:
+        backface-visibility: hidden;
+        backface-visibility: visible;               // default
