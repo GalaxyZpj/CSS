@@ -1,3 +1,5 @@
+################################################# S . T . A . R . T #################################################
+
 CSS: Cascading Style Sheets
 
 Combinators:
@@ -1117,3 +1119,257 @@ Dynamic columns and rows according to the content filling the viewport:
     Eg:
         backface-visibility: hidden;
         backface-visibility: visible;               // default
+
+
+# Transitions
+
+'opacity' property:
+    It is used to define the opacity of the element.
+    It accepts values between 0 and 1.
+    0 means transparent, 1 means full opacity.
+    Eg:
+        opacity: 1;
+        opacity: 0;
+
+'transition' property:
+    It is used to define the transitions for an element.
+    It accepts values in the following manner:
+        transition: [property] [duration] [delay] [timing-function], same for the second property;
+        [property] states that which property needs to be animated.
+        [duration] states the duration of animation.
+        [delay] states after how much time will the transition start.
+        [timing-function] states the behavior of animation at certain point during the animation.
+    Eg:
+        transition: opacity 200ms ease-out, transform 500ms ease-out;
+        'ease-out' states that the animation will be faster at its initiation and slower at its ending.
+        Similarly there are other values such as 'ease-in', etc.
+
+'cubic-bezier()' property:
+    This function provides the functionality to design custom timing functions.
+
+
+# Animations
+
+"@keyframes":
+    These are used to define the style of an element at a given point of time.
+    Eg:
+        @keyframes [customName] {
+            from {
+                properties...
+            }
+            to {
+                properties...
+            }
+        }
+    To add more keyframes, we can think of 'from': 0% and 'to': 100% and add more keyframes using a percentage value:
+        @keyframes [customName] {
+            0% {
+                properties...
+            }
+            50% {
+                properties...
+            }
+            100% {
+                properties...
+            }
+        }
+
+'animation' property:
+    This property is used to consume a keyframe on the element and define additional properties related to the
+            animation.
+    Eg:
+        animation: [customName] [duration] [delay] [iterate] [timing-function] [animation-style] [fill-state];
+        [customName] is the name assigned to the keyframe.
+        [duration] states the duration of the animation.
+        [delay] states the delay after which the animation is to be started.
+        [iterate] specifies the number of times the animation needs to be repeated.
+        [animation-style] specifies the style of animation.
+            We have certain predifined styles we can use for [animation-style]:
+                alternate
+                alternate-reverse
+                etc.
+        [fill-state] states the ending state of the element after the animation.
+            We have certain predifined fill-state values:
+                forwards: exits the animation with properties specified under 'to' statement.
+                backwards: exits the animation with properties specified under 'from' statement.
+                both: 
+
+Animation properties for 'addEventListner' function:
+    We can access the animation instants using the addEventListner function in our JavaScript file.
+    We have certain event keywords to do so.
+    Eg:
+        class.addEventListner('animationstart', function(event) { });
+        class.addEventListner('animationiteration', function(event) { });
+        class.addEventListner('animationend', function(event) { });
+
+
+# Writing Future Proof CSS Code
+
+CSS Variables:
+    We can assign variables to values that are reused in the document a lot.
+    Eg:
+        :root {
+            --var-name: any_value;
+        }
+        The variables are always defined inside the ':root' pseudo class.
+    Now to use the variable, we do the following:
+        color: var(--var-name, fallback-value);
+        fallback-value needs to be defined incase the specified variable does not exist or the browser does
+                not support assigning variables.
+
+"@supports()":
+    This query executes the code inside it only if the browser supports the code specified as the condition.
+    Eg:
+        @supports (display: grid) {
+            body {
+                ===
+            }
+        }
+
+
+# Syntactically Awesome Style Sheets (SASS/SCSS)
+
+SASS/SCSS provide a programatic way to type CSS code.
+It offers features like loops, statements, etc to simplify the CSS code.
+
+SASS does not work with '{ }' or ';', it uses indentations to understand what's inside its parent.
+SCSS on the other hand has the same working as CSS for '{ }' and ';'.
+
+SASS can be compiled to CSS using the 'sass' tool which is installed from gem library for mac.
+To install sass on mac, run:
+    $ sudo gem install sass
+
+It will install sass globally.
+
+Now to convert .sass code to .css, we do the following:
+    $ sass main.sass main.css
+    This will create 2 additional files:
+        main.css
+        main.css.map
+
+To enable sass watch mode, use the following:
+    $ sass --watch main.sass:main.css
+    This will automatically detect changes in the sass file and compile it to the css file.
+
+
+# SASS Features
+
+Nested Selectors:
+    We can use selectors nested inside another selector to address the child element of the parent selector.
+    Eg:
+        .class {
+            button {
+
+            }
+        }
+        This will refer to any button element inside the element which has the '.class' class.
+
+Nested Properties:
+    We can also nest properties.
+    Eg:
+        flex: {
+            direction: row;
+            wrap: nowrap
+        }
+        This will be equivalent to:
+            flex-direction: row;
+            flex-wrap: nowrap;
+
+Variables:
+    We can create variables in SASS.
+    They will be assigned as normal values to the properties where we use the variable, in the CSS file.
+    
+    To create variable, on the top of the document:
+        $varName: value;
+    
+    To use the variable:
+        color: $varName 
+
+    We can also create a list and assign it to a variable.
+    A list is a set of multiple values.
+    Eg:
+        $borderVar: 2px solid green;
+    
+    We can also create a map and assign it to a variable.
+    A map is similar to a dictionary in Python.
+    It is a set of key and value pairs.
+    To assign maps:
+        $mapname: (key1: value1, key2: value2);
+    To access the value of a map, we use map-get() function:
+        color: map-get($mapname, key2);
+
+SASS also comes with many built in functions.
+SASS also supports simple arithmatic operations (+, -, *, /) on dimentional values.
+
+Importing .sass/.scss file:
+    Importing is done in a better way in SASS.
+    We can define, so called, 'Partials', which is a .sass/.scss file which includes several sass code and
+            need to be seperated into a different file for the purpose of organizing code.
+    We can import this partial in the main sass file as:
+        @import "_partialName.sass"
+    Name of a partial file always starts with an underscore '_'.
+    When the sass code is compiled into css file, then the code inside a partial is included into the css file 
+            itself.
+    If we import a css file inside a sass file, it will have an import statement for the imported file in the
+            compiled css file.
+
+Advanced @media queries:
+    SASS allows us to use @media queries in a different way then CSS.
+    We can include the @media query inside the selector on which the @media query is to be applied.
+    And now, we do not need to specify the selector inside the media query.
+    Eg:
+        html {
+            font-size: 1px;
+            @media (min-width: 40rem) {
+                font-size: 0.5px;
+            }
+        }
+
+Inheritance:
+    We can inherit the SASS code defined for a selector into another selector.
+    Eg:
+        .className {
+            color: white;
+        }
+        .class2 {
+            @extend .className;
+        }
+        Here, '@extend' is used to call upon the .className class to include all its properties into the
+                .class2 class.
+
+Mixins:
+    We can define our custom functions in SASS using '@mixin' directive.
+    Eg:
+        @mixin custom-mixin() {
+            ___code___
+        }
+    To use this mixin, we do the following:
+        @include custom-mixin();
+    
+    We can also use @mixin to accepts arguments:
+        @mixin custom-mixin($arg) {
+            ___code___
+        }
+    
+    We can also use @mixin to take some additional code from where we use the mixin using @content directive:
+        @mixin custom-mixin() {
+            @content;
+        }
+        We call this mixin as follows:
+            @include custom-mixin() {
+                ___code___
+            }
+
+Addressing :pseudo classes:
+    Simply nesting a pseudo class inside a selector won't work.
+    It will treat it as a nested selector.
+    For pseudo classes or similarly attatched selectors to work, we do the following:
+        button {
+            &:hover {
+                ___code___
+            }
+        }
+        '&' tells SASS that we need to connect the following directly with the parent selector, not nest it
+                inside it.
+
+##################################################### E . N . D #####################################################
